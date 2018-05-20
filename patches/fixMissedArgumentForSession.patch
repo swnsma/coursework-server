@@ -1,0 +1,17 @@
+diff --git vendor/cboden/ratchet/src/Ratchet/WebSocket/WsServer.php vendor/cboden/ratchet/src/Ratchet/WebSocket/WsServer.php
+index 8030604..ff5002e 100644
+--- vendor/cboden/ratchet/src/Ratchet/WebSocket/WsServer.php
++++ vendor/cboden/ratchet/src/Ratchet/WebSocket/WsServer.php
+@@ -139,7 +139,11 @@ class WsServer implements HttpServerInterface {
+ 
+         $this->connections->attach($conn, new ConnContext($wsConn, $streamer));
+ 
+-        return $this->delegate->onOpen($wsConn);
++        if ($this->delegate instanceof HttpServerInterface) {
++            return $this->delegate->onOpen($wsConn, $request);
++        } else {
++            return $this->delegate->onOpen($wsConn);
++        }
+     }
+ 
+     /**

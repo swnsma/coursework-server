@@ -1,0 +1,23 @@
+{
+    "name": "al.kravchuk/coursework-5.2-server",
+    "authors": [
+        {
+            "name": "al.kravchuk",
+            "email": "al.kravchuk@ism-ukraine.com"
+        }
+    ],
+    "require": {
+        "silex/silex": "1.2.*",
+        "cboden/ratchet": "0.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Coursework\\Chat\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "if [ -d patches ] && [ \"$(ls -A patches)\" ]; then find patches/* | sort -r | xargs -d '\n' cat | patch -p0 --force -R --silent; cat patches/* | patch -p0 --force; else echo 'No patches found'; fi;"
+        ]
+    }
+}
